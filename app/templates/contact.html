@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <h2>Contact Form</h2>
+    <p>Fill out this form to contact the site owners.</p>
+
+    <!-- Flash Messages Section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Contact Form -->
+    <form method="post" action="{{ url_for('contact') }}" novalidate>
+        {{ form.csrf_token }}
+        
+        <div class="form-group mb-3">
+            {{ form.name.label(class="form-label") }} 
+            {{ form.name(class="form-control", placeholder="Joe Brown") }}
+        </div>
+        
+        <div class="form-group mb-3">
+            {{ form.email.label(class="form-label") }} 
+            {{ form.email(class="form-control", placeholder="jbrown@example.com") }}
+        </div>
+        
+        <div class="form-group mb-3">
+            {{ form.subject.label(class="form-label") }} 
+            {{ form.subject(class="form-control") }} 
+        </div>
+        
+        <div class="form-group mb-3">
+            {{ form.message.label(class="form-label") }} 
+            {{ form.message(class="form-control", rows="3") }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

@@ -4,4 +4,15 @@
 <h1>Flask Starter Code</h1>
 <p class="lead">Use this starter template for your Flask apps as a way to quickly start any new project.<br>
 All you get are these files and mostly barebones HTML/CSS files.</p>
+<!-- Flash Messages Section -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endwith %}
 {% endblock %}
